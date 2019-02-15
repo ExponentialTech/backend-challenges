@@ -1,0 +1,105 @@
+
+CREATE TABLE client_portfolio (
+	id INTEGER NOT NULL AUTO_INCREMENT, 
+	PRIMARY KEY (id)
+)
+
+
+
+CREATE TABLE asset_class (
+	id INTEGER NOT NULL AUTO_INCREMENT, 
+	name VARCHAR(255) NOT NULL, 
+	PRIMARY KEY (id)
+)
+
+
+
+CREATE TABLE company (
+	id INTEGER NOT NULL AUTO_INCREMENT, 
+	name VARCHAR(255) NOT NULL, 
+	description VARCHAR(10000) NOT NULL, 
+	PRIMARY KEY (id)
+)
+
+
+
+CREATE TABLE instrument_type (
+	id INTEGER NOT NULL AUTO_INCREMENT, 
+	name VARCHAR(255) NOT NULL, 
+	asset_class INTEGER, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(asset_class) REFERENCES asset_class (id)
+)
+
+
+
+CREATE TABLE company_esg (
+	company INTEGER NOT NULL, 
+	date DATE NOT NULL, 
+	e FLOAT, 
+	s FLOAT, 
+	g FLOAT, 
+	PRIMARY KEY (company, date), 
+	FOREIGN KEY(company) REFERENCES company (id)
+)
+
+
+
+CREATE TABLE client_portfolio_esg (
+	client_portfolio INTEGER NOT NULL, 
+	date DATE NOT NULL, 
+	e FLOAT, 
+	s FLOAT, 
+	g FLOAT, 
+	PRIMARY KEY (client_portfolio, date), 
+	FOREIGN KEY(client_portfolio) REFERENCES client_portfolio (id)
+)
+
+
+
+CREATE TABLE instrument (
+	id INTEGER NOT NULL AUTO_INCREMENT, 
+	type INTEGER NOT NULL, 
+	isin VARCHAR(12) NOT NULL, 
+	name VARCHAR(255) NOT NULL, 
+	company INTEGER, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(type) REFERENCES instrument_type (id), 
+	FOREIGN KEY(company) REFERENCES company (id)
+)
+
+
+
+CREATE TABLE portfolio_holding (
+	client_portfolio INTEGER NOT NULL, 
+	instrument INTEGER NOT NULL, 
+	weight FLOAT NOT NULL, 
+	PRIMARY KEY (client_portfolio, instrument), 
+	FOREIGN KEY(client_portfolio) REFERENCES client_portfolio (id), 
+	FOREIGN KEY(instrument) REFERENCES instrument (id)
+)
+
+
+
+CREATE TABLE instrument_esg (
+	instrument INTEGER NOT NULL, 
+	date DATE NOT NULL, 
+	e FLOAT, 
+	s FLOAT, 
+	g FLOAT, 
+	PRIMARY KEY (instrument, date), 
+	FOREIGN KEY(instrument) REFERENCES instrument (id)
+)
+
+
+
+CREATE TABLE instrument_component (
+	component_instrument INTEGER NOT NULL, 
+	compound_instrument INTEGER NOT NULL, 
+	weight FLOAT NOT NULL, 
+	PRIMARY KEY (component_instrument, compound_instrument), 
+	FOREIGN KEY(component_instrument) REFERENCES instrument (id), 
+	FOREIGN KEY(compound_instrument) REFERENCES instrument (id)
+)
+
+

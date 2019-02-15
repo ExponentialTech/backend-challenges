@@ -1,0 +1,3 @@
+# pip install -U pip setuptools first
+ipython<6
+sqlalchemy
