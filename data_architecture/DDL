@@ -45,18 +45,6 @@ CREATE TABLE company_esg (
 
 
 
-CREATE TABLE client_portfolio_esg (
-	client_portfolio INTEGER NOT NULL, 
-	date DATE NOT NULL, 
-	e FLOAT, 
-	s FLOAT, 
-	g FLOAT, 
-	PRIMARY KEY (client_portfolio, date), 
-	FOREIGN KEY(client_portfolio) REFERENCES client_portfolio (id)
-)
-
-
-
 CREATE TABLE instrument (
 	id INTEGER NOT NULL AUTO_INCREMENT, 
 	type INTEGER NOT NULL, 
