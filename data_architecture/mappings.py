@@ -86,9 +86,11 @@ class CompanyESG(Base):
     __tablename__ = 'company_esg'
     company = Column(Integer, ForeignKey(Company.id), primary_key=True)
     date = Column(Date, primary_key=True)
-    e = Column(Float, nullable=True)  # Nullable for now. Should we allow for missing scores or not?
-    s = Column(Float, nullable=True)
-    g = Column(Float, nullable=True)
+
+    # Assuming all three must be present. If missing values are allowed, split this into three tables.
+    e = Column(Float, nullable=False)
+    s = Column(Float, nullable=False)
+    g = Column(Float, nullable=False)
     # Combined score can be derived from e, s, and g, so it is not
     # stored.
     #
@@ -110,9 +112,9 @@ class CompanyESG(Base):
 #     __tablename__ = 'client_portfolio_esg'
 #     client_portfolio = Column(Integer, ForeignKey(ClientPortfolio.id), primary_key=True)
 #     date = Column(Date, primary_key=True)
-#     e = Column(Float, nullable=True)
-#     s = Column(Float, nullable=True)
-#     g = Column(Float, nullable=True)
+#     e = Column(Float, nullable=False)
+#     s = Column(Float, nullable=False)
+#     g = Column(Float, nullable=False)
 
 
 # If we're using a normalized representation, only atomic
@@ -125,9 +127,9 @@ class InstrumentESG(Base):
     __tablename__ = 'instrument_esg'
     instrument = Column(Integer, ForeignKey(Instrument.id), primary_key=True)
     date = Column(Date, primary_key=True)
-    e = Column(Float, nullable=True)
-    s = Column(Float, nullable=True)
-    g = Column(Float, nullable=True)
+    e = Column(Float, nullable=False)
+    s = Column(Float, nullable=False)
+    g = Column(Float, nullable=False)
 
 # There's redundancy among the different ESG classes. If that leads to
 # a lot of redundancy in application code, might want to replace them

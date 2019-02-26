@@ -36,9 +36,9 @@ CREATE TABLE instrument_type (
 CREATE TABLE company_esg (
 	company INTEGER NOT NULL, 
 	date DATE NOT NULL, 
-	e FLOAT, 
-	s FLOAT, 
-	g FLOAT, 
+	e FLOAT NOT NULL, 
+	s FLOAT NOT NULL, 
+	g FLOAT NOT NULL, 
 	PRIMARY KEY (company, date), 
 	FOREIGN KEY(company) REFERENCES company (id)
 )
@@ -72,9 +72,9 @@ CREATE TABLE portfolio_holding (
 CREATE TABLE instrument_esg (
 	instrument INTEGER NOT NULL, 
 	date DATE NOT NULL, 
-	e FLOAT, 
-	s FLOAT, 
-	g FLOAT, 
+	e FLOAT NOT NULL, 
+	s FLOAT NOT NULL, 
+	g FLOAT NOT NULL, 
 	PRIMARY KEY (instrument, date), 
 	FOREIGN KEY(instrument) REFERENCES instrument (id)
 )
