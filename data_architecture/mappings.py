@@ -48,10 +48,11 @@ class Instrument(Base):
     # Spec says "Companies [...] can have multiple instruments." I'm
     # not sure what it means for a company to "have" an instrument. If
     # a company "has" a mutual fund, does that mean that it manages
-    # the fund, or that it owns shares in the fund?  Can multiple
-    # companies "have" the same instrument or not? I'm assuming
-    # not. If that assumption is invalid, make a separate table for
-    # the company-instrument association.
+    # the fund, owns shares in the fund, or has issued stock that is
+    # held by the fund?  Can multiple companies "have" the same
+    # instrument or not? I'm assuming not. If that assumption is
+    # invalid, make a separate table for the company-instrument
+    # association.
     company = Column(Integer, ForeignKey(Company.id), nullable=True)
 
 
